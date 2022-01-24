@@ -1,0 +1,7 @@
+{
+  "name": "splitpane",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
