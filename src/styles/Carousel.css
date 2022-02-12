@@ -1,0 +1,12 @@
+.slide-hero {
+    height: 60vh;
+}
+
+.slide-hero ion-img {
+    width: 100vw;
+}
+
+ion-slides.slides {
+    --bullet-background-active: var(--ion-color-success-shade);
+    --bullet-background: var(--ion-color-success-tint);
+}

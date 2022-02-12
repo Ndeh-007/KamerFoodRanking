@@ -1,0 +1,64 @@
+ion-searchbar.searchbar {
+    --border-radius: 100px;
+    --background: rgba(255, 255, 255, 0);
+}
+
+ion-row.short-row {
+    height: 10%;
+}
+
+
+/* 
+ion-list.add-dish-list ion-item {
+    --highlight-color-focused: var(--ion-color-success-tint)
+} */
+
+ion-input.popover-input {
+    --background: var(--ion-color-success-tint);
+    --padding-end: 2rem;
+    --padding-start: 2rem;
+}
+
+.pp-class {
+    --min-width: max-content;
+}
+
+ion-list.list ion-label {
+    word-spacing: 5px;
+}
+
+.main-content ion-grid,
+.main-content ion-row,
+.main-content ion-col {
+    --ion-grid-column-padding: 0px;
+    --ion-grid-padding: 0px;
+    --ioo-row-padding: 0px;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 2rem;
+}
+
+.on {
+    color: var(--ion-color-warning);
+}
+
+.off {
+    color: #ccc;
+}
+
+ion-card.food-card {
+    /* box-shadow: none; */
+    /* border: 1px solid var(--ion-color-medium-tint); */
+    margin: 5px 0px;
+    border-radius: 0px;
+}
+
+ion-card.food-card ion-img {
+    width: 100%;
+    height: 100%;
+}

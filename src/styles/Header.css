@@ -1,0 +1,34 @@
+/* .selected {
+    border-bottom: 2px solid var(--ion-color-success-tint);
+} */
+
+.selected ion-button {
+    --color: var(--ion-color-success-tint);
+}
+
+.default {
+    color: var(--ion-color-medium-tint);
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.nav-button {
+    margin: 0;
+}
+
+ion-header.header,
+ion-header.header>ion-toolbar {
+    height: max-content;
+}
+
+.header ion-row,
+.header ion-col {
+    --ion-grid-column-padding: 0px;
+    --ioo-row-padding: 0px;
+}
+
+ion-header.header {
+    background: var(--ion-color-light-rgb)
+}
