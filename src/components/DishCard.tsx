@@ -56,7 +56,7 @@ const DishCard: React.FC<{
     <IonCard mode="md" className="food-card">
       {props.data.image.length < 138 ? (
         <>
-          <IonImg src={localImages.noImage}></IonImg>
+         {""}
         </>
       ) : (
         <>

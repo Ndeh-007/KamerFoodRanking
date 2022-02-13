@@ -36,7 +36,7 @@ const Carousel: React.FC = () => {
 
   return (
     <>
-      <div className="sub-hero ion-hide-sm-up">
+      <div className="sub-hero ion-hide-lg-up">
         <ExploreContainer
           description={carouselInfo[0].description}
           title={carouselInfo[0].title}

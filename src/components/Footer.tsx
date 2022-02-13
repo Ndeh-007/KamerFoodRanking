@@ -13,8 +13,8 @@ const Footer: React.FC = () => {
       <div className="center-footer">
         <IonItem lines="none" color="light">
           <IonButtons className="center-footer">
-            <IonButton className="ion-text-capitalize">Home</IonButton>
-            <IonButton className="ion-text-capitalize">Rankings</IonButton>
+            <IonButton className="ion-text-capitalize" routerLink="/">Home</IonButton>
+            <IonButton className="ion-text-capitalize" routerLink="/Rankings">Rankings</IonButton>
           </IonButtons>
         </IonItem>
       </div>

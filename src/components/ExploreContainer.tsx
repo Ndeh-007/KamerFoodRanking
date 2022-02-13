@@ -34,7 +34,7 @@ const ExploreContainer: React.FC<ContainerProps> = (props) => {
                     <IonText color="success">T</IonText>
                     <IonText color="danger">o</IonText>
                     <IonText color="warning">p</IonText>{" "}
-                    <IonText>Rated Dishes</IonText>
+                    <IonText >Rated Dishes</IonText>
                   </h1>
                   <div className="ion-padding-horizontal">
                     <p className="text-light">{props.description}</p>
@@ -46,7 +46,7 @@ const ExploreContainer: React.FC<ContainerProps> = (props) => {
                     <IonText color="success">Ka</IonText>
                     <IonText color="danger">m</IonText>
                     <IonText color="warning">er</IonText>{" "}
-                    <IonText>Food Rankings</IonText>
+                    <IonText className="text-light">Food Rankings</IonText>
                   </h1>
                   <div className="ion-padding-horizontal">
                     <p className="text-light">{props.description}</p>

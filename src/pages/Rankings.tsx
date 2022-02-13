@@ -1,8 +1,10 @@
 import {
+  IonAvatar,
   IonButton,
   IonCard,
   IonCardContent,
   IonCardHeader,
+  IonCardSubtitle,
   IonCardTitle,
   IonCol,
   IonContent,
@@ -16,9 +18,11 @@ import {
   IonItem,
   IonLabel,
   IonList,
+  IonListHeader,
   IonModal,
   IonPage,
   IonProgressBar,
+  IonRippleEffect,
   IonRow,
   IonSearchbar,
   IonSpinner,
@@ -28,7 +32,14 @@ import {
   IonToast,
   IonToolbar,
 } from "@ionic/react";
-import { add, arrowBack, close, informationCircle } from "ionicons/icons";
+import {
+  add,
+  addCircle,
+  arrowBack,
+  close,
+  cloudUpload,
+  informationCircle,
+} from "ionicons/icons";
 import React, { useEffect, useRef, useState } from "react";
 import DishCard from "../components/DishCard";
 import Footer from "../components/Footer";
@@ -48,6 +59,7 @@ const Rankings: React.FC = () => {
   const [modalAlert, setModalAlert] = useState(true);
   const [searchArea, setSearchArea] = useState(true);
   const [customImage, setcustomImage] = useState(false);
+  const [totalDishes, setTotalDishes] = useState(0);
   const [loading, setLoading] = useState(false);
   const fileInput = useRef<HTMLInputElement>(null);
   const [topRated, setTopRated] = useState<DishCardProperties[]>([]);
@@ -87,6 +99,7 @@ const Rankings: React.FC = () => {
             count = Number(doc.data().rateCount) + 1;
           } else {
             count = Number(doc.data().rateCount) - 1;
+            if (count <= 0) count = 0;
           }
 
           firestore
@@ -160,8 +173,11 @@ const Rankings: React.FC = () => {
       .catch((err) => console.error(err));
   }
 
-  // to show the image the user is about to upload.
-  // image must be gotten and converted to dataURL
+
+
+  /** 
+   * @param {File} file the file to be converted to DataURL 
+   */
   const fileToDataUri = (file: File) =>
     new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -171,6 +187,10 @@ const Rankings: React.FC = () => {
       reader.readAsDataURL(file);
     });
 
+    
+  /** 
+   * @param {File} file the file for the onChange function
+   */
   const onChange = (file: File | null) => {
     if (!file) {
       setDataUri("");
@@ -200,15 +220,16 @@ const Rankings: React.FC = () => {
               image: url,
               origin: originOfDishInput.current?.value,
               uploader: uploaderOfDishInput.current?.value,
-              rating: "1",
+              rating: "0",
               description: descriptionOfDishinput.current?.value,
-              rateCount: "1",
-              totalRating: "1",
+              rateCount: "0",
+              totalRating: "0",
               liked: false,
               id: Date.now(),
             })
             .then((res) => {
               setUploading(false);
+              setDataUri(localImages.noImage);
               setAddDishModal(false);
               setShowToastUploadSuccessful(true);
             })
@@ -246,6 +267,7 @@ const Rankings: React.FC = () => {
         docs.forEach((doc) => {
           temp.push(doc.data());
         });
+        setTotalDishes(temp.length)
         SeparateDishes(temp);
         setLoading(false);
       })
@@ -316,18 +338,51 @@ const Rankings: React.FC = () => {
         )} */}
         <IonGrid>
           <IonRow className="ion-justify-content-center">
-            <IonCol size="12" sizeSm="12" sizeLg="4">
-              <IonHeader slot="fixed">
-                <IonCard>
-                  <IonCardContent>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Cum culpa sunt nostrum doloribus velit mollitia tempore
-                    suscipit, qui magni molestias incidunt quisquam magnam.
-                  </IonCardContent>
-                </IonCard>
-              </IonHeader>
+            <IonCol
+              size="12"
+              sizeSm="12"
+              sizeLg="4"
+              className="ion-hide-lg-down"
+            >
+              <IonRow>
+                <IonCol></IonCol>
+                <IonCol >
+                  <IonHeader>
+                    <IonCard>
+                      <IonCardHeader className="ion-text-center">
+                        <IonCardTitle>Welcome</IonCardTitle>
+                      </IonCardHeader>
+                      <IonCardContent>
+                        Go through and add to masses, stating your claim to that
+                        which you believe to be true.
+                      </IonCardContent>
+                    </IonCard>
+                  </IonHeader>
+                </IonCol>
+              </IonRow>
             </IonCol>
             <IonCol size="12" sizeSm="12" sizeLg="4">
+              <IonCard className="header-card ion-hide-md-down">
+                <IonItem
+                  color="light"
+                  button
+                  onClick={() => setAddDishModal(true)}
+                >
+                  <IonAvatar slot="start">
+                    <IonImg src={localImages.noImage}></IonImg>
+                  </IonAvatar>
+                  <IonLabel slot="start">Click to add a new dish</IonLabel>
+                  <IonButton
+                    slot="end"
+                    size="large"
+                    fill="clear"
+                    color="warning"
+                    onClick={() => setAddDishModal(true)}
+                  >
+                    <IonIcon slot="icon-only" icon={addCircle}></IonIcon>
+                  </IonButton>
+                </IonItem>
+              </IonCard>
               {loading ? (
                 <div className="ion-text-center">
                   <IonSpinner color="success" name="dots"></IonSpinner>
@@ -357,14 +412,37 @@ const Rankings: React.FC = () => {
                 );
               })}
             </IonCol>
-            <IonCol size="12" sizeSm="12" sizeLg="4"></IonCol>
+            <IonCol size="12" sizeSm="12" sizeLg="4" className="ion-hide-lg-down">
+              <IonRow>
+                <IonCol>
+                  <IonHeader>
+                    <IonCard className="fixed-right">
+                      <IonList>
+                        <IonListHeader className="ion-text-center">
+                          <IonLabel color="success">Summary</IonLabel>
+                        </IonListHeader>
+                        <IonItem lines="full">
+                          <IonLabel slot="start">Total Dishes</IonLabel>
+                          <IonLabel slot="end">{totalDishes}</IonLabel>
+                        </IonItem>
+                        {/* <IonItem lines="none">
+                          <IonLabel slot="start">Total Visitors</IonLabel>
+                          <IonLabel slot="end">{56}</IonLabel>
+                        </IonItem> */}
+                      </IonList>
+                    </IonCard>
+                  </IonHeader>
+                </IonCol>
+                <IonCol></IonCol>
+              </IonRow>
+            </IonCol>
           </IonRow>
         </IonGrid>
         <IonFab
           horizontal="end"
           vertical="bottom"
           slot="fixed"
-          // className="ion-margin"
+          className="ion-hide-md-up"
         >
           <IonFabButton color="success" onClick={() => setAddDishModal(true)}>
             <IonIcon icon={add}></IonIcon>
@@ -411,7 +489,7 @@ const Rankings: React.FC = () => {
                 >
                   <IonIcon
                     icon={close}
-                    color="dark"
+                    color="dark" 
                     className="ion-padding"
                   ></IonIcon>
                 </IonButton>
