@@ -63,16 +63,16 @@ const Home: React.FC = () => {
     });
   }, []);
 
-  function secondVisit() {
-    let value = localStorage.getItem("visited");
-    let redirect = localStorage.getItem("redirect");
-    if ((value === "true") || (redirect === "false") ) {
-      localStorage.setItem("redirect","false")
-      window.location.pathname = "/Rankings";
-    } else {
-      localStorage.setItem("visited", "true");
-    }
-  }
+  // function secondVisit() {
+  //   let value = localStorage.getItem("visited");
+  //   let redirect = localStorage.getItem("redirect");
+  //   if ((value === "true") || (redirect === "false") ) {
+  //     localStorage.setItem("redirect","false")
+  //     window.location.pathname = "/Rankings";
+  //   } else {
+  //     localStorage.setItem("visited", "true");
+  //   }
+  // }
   return (
     <IonPage>
       <IonContent>
