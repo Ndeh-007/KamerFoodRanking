@@ -1,1 +1,1 @@
-site: kamer-food-rankings.web.app
+url: [kamer-food-rankings.web.app](https://kamer-food-rankings.web.app)
